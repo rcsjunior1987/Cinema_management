@@ -1,0 +1,16 @@
+D:\Documents\GitHub\rcsjunior1987\Cinema_management\bin\Debug\net5.0\Cinema_management.exe
+D:\Documents\GitHub\rcsjunior1987\Cinema_management\bin\Debug\net5.0\Cinema_management.deps.json
+D:\Documents\GitHub\rcsjunior1987\Cinema_management\bin\Debug\net5.0\Cinema_management.runtimeconfig.json
+D:\Documents\GitHub\rcsjunior1987\Cinema_management\bin\Debug\net5.0\Cinema_management.runtimeconfig.dev.json
+D:\Documents\GitHub\rcsjunior1987\Cinema_management\bin\Debug\net5.0\Cinema_management.dll
+D:\Documents\GitHub\rcsjunior1987\Cinema_management\bin\Debug\net5.0\ref\Cinema_management.dll
+D:\Documents\GitHub\rcsjunior1987\Cinema_management\bin\Debug\net5.0\Cinema_management.pdb
+D:\Documents\GitHub\rcsjunior1987\Cinema_management\obj\Debug\net5.0\Cinema_management.csprojAssemblyReference.cache
+D:\Documents\GitHub\rcsjunior1987\Cinema_management\obj\Debug\net5.0\Cinema_management.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\GitHub\rcsjunior1987\Cinema_management\obj\Debug\net5.0\Cinema_management.AssemblyInfoInputs.cache
+D:\Documents\GitHub\rcsjunior1987\Cinema_management\obj\Debug\net5.0\Cinema_management.AssemblyInfo.cs
+D:\Documents\GitHub\rcsjunior1987\Cinema_management\obj\Debug\net5.0\Cinema_management.csproj.CoreCompileInputs.cache
+D:\Documents\GitHub\rcsjunior1987\Cinema_management\obj\Debug\net5.0\Cinema_management.dll
+D:\Documents\GitHub\rcsjunior1987\Cinema_management\obj\Debug\net5.0\ref\Cinema_management.dll
+D:\Documents\GitHub\rcsjunior1987\Cinema_management\obj\Debug\net5.0\Cinema_management.pdb
+D:\Documents\GitHub\rcsjunior1987\Cinema_management\obj\Debug\net5.0\Cinema_management.genruntimeconfig.cache
