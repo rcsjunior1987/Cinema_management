@@ -89,7 +89,7 @@ namespace Cinema_management
             { 
                 Console.WriteLine();
                 Console.WriteLine("Please select from the following options:");
-                Console.WriteLine("1. List Available Bikes");
+                Console.WriteLine("1. List Available Bike");
                 Console.WriteLine("2. List hired bikes");
                 Console.WriteLine("3. List Bikes being fixed");
                 Console.WriteLine("4. Hire a Bike");
