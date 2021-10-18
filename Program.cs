@@ -88,7 +88,7 @@ namespace Cinema_management
             while (exit == false)
             { 
                 Console.WriteLine();
-                Console.WriteLine("Please seuuulect from the following options:");
+                Console.WriteLine("Please select from the following options:");
                 Console.WriteLine("1. List Available Bikes");
                 Console.WriteLine("2. List hired bikes");
                 Console.WriteLine("3. List Bikes being fixed");
