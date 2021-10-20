@@ -7,26 +7,25 @@ using System.Collections.Generic;
      It is extended from IComparable. That is, any object that can be
        compared to another with the CompareTo() method, which is used
         to compare elements to be able to sort them.
-*/    
-
-public class GenericList<T> : LinkedList<T> where T : IComparable
+*/     
+ 
+public class GenericLinkedList<T> : LinkedList<T> where T : IComparable
     {
-        public GenericList() : base() {}
+        public GenericLinkedList() : base() {}
 
         public override void Add(T obj)
         {
             base.Add(obj);
         }
 
-        public void InsertSort(T obj)
-        {
-            base.Add(obj);
+        public virtual void Sort() { }
+
+        public virtual void Remove(T obj) {
+            base.Remove();
         }
 
-        public virtual void Remove(T obj)
-        {
-            this.current = base.Find(obj);
-            base.Remove();
+        public virtual Node<T> Search(T obj) {
+             return null;
         }
 
     }

@@ -9,70 +9,65 @@ using System.Collections.Generic;
 */
 public class LinkedList<T> : IEnumerable<T>
     {
-        public Node<T> head = null;
-        public Node<T> tail = null;
-        public Node<T> current = null;
-        public int Length = 0;
+        private Node<T> head = null;
+        public Node<T> Head { get => head; set => head = value; } 
+
+        private Node<T> current = null;
+        public Node<T> Current { get => current; set => current = value; }
 
         public LinkedList() { }
 
-        public Node<T> Previous()
+        /*public Node<T> Previous()
         {
-            return current.previous;
+            return current.Previous;
         }
 
         public Node<T> Next()
         {
-            return current.next;
-        }
+            return current.Next;
+        }*/
 
         /* Adds an object in the end of the list. */
         public virtual void Add(T obj)
         {
-            Node<T> previous = null;
-            if (this.tail != null)
-                previous = this.tail;
+            //Create a new node  
+            //Node<T> newNode = new Node<T>(obj, previous, next);
+            Node<T> newNode = new Node<T>(obj, null);
 
-            Node<T> newNode = new Node<T>(obj, previous, null);
+            //link new node to list
+            newNode.Next = this.Head;
 
-            if (this.Length == 0)
-            {
-                this.head = newNode;
-                this.tail = newNode;
-                this.current = newNode;
-            }
-            else
-            {
-                Node<T> testObject = this.Find(obj);
-                if (testObject != null)
-                {
-                    testObject.quantity += 1;
-                }
-                else
-                {
-                    newNode.previous = this.tail;
-                    this.tail.next = newNode;
-                    this.tail = newNode;
-                }
-            }
-
-            this.Length += 1;
+            //head points to new node
+            this.Head = newNode;
         }
 
         /* Removes elements from any position of the List */
         public virtual void Remove()
         {
-            if (this.Length > 0)
+
+            if (this.Current == this.Head)
             {
-                /* Check whether the obj to be removed lies in Tail */
+                //this.Current.Next.Previous = null;
+                this.Head = this.Current.Next;
+            }
+            // Remove from any position of the List 
+            else{
+                //this.Current.Next.Previous = this.Current.Previous;
+                //this.Current.Previous.Next = this.Current.Next;
+            }
+
+
+            /*if (this.Length > 0)
+            {
+                 Check whether the obj to be removed lies in Tail 
                 if (this.current == this.tail)
                 {                    
 
                     if (this.Length > 1)
                     {
-                        this.tail = this.current.previous;
-                        this.current.previous.next = null;
-                        this.current.previous = null;
+                        this.tail = this.current.Previous;
+                        this.current.Previous.Next = null;
+                        this.current.Previous = null;
                     } 
                     else
                     {
@@ -83,21 +78,21 @@ public class LinkedList<T> : IEnumerable<T>
                 }
                 else
                 {
-                    /* Check whether the obj to be removed lies in Head */
+                     Check whether the obj to be removed lies in Head 
                     if (this.current == this.head)
                     {
-                        this.current.next.previous = null;
-                        this.head = this.current.next;
+                        this.current.Next.Previous = null;
+                        this.head = this.current.Next;
                     }
-                    /* Remove from any position of the List */
+                     Remove from any position of the List 
                     else{
-                        this.current.next.previous = this.current.previous;
-                        this.current.previous.next = this.current.next;
+                        this.current.Next.Previous = this.current.Previous;
+                        this.current.Previous.Next = this.current.Next;
                     }
                 }
 
                 --this.Length;
-            }
+            }*/
         }
 
         public virtual bool Contains(T obj)
@@ -127,12 +122,12 @@ public class LinkedList<T> : IEnumerable<T>
 
         public IEnumerator<T> GetEnumerator()
         {
-            this.current = this.head;
+            this.Current = this.Head;
 
             while (this.current != null)
             {
-                yield return this.current.NodeObject;
-                this.current = this.current.next;
+                yield return this.Current.Content;
+                this.Current = this.Current.Next;
             }
         }
 

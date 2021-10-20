@@ -7,7 +7,7 @@ using System.Collections.Generic;
       rather than in the middle.
 */
 public class Stack<T>
-{
+{ 
     private T[] vStack;
     int top;
     public T[] VStack { get => vStack; set => vStack = value; }
@@ -51,15 +51,6 @@ public class Stack<T>
        return topElement;
    }
 
-   public T[] GetAllStackElements()
-   {
-        T[] Elements = new T[Top];
-
-        Array.Copy(VStack, 0, Elements, 0, Top);
-
-        return Elements;
-   }
-
     public override bool Equals(object obj)
     {
         return obj is Stack<T> stack &&
@@ -68,18 +59,18 @@ public class Stack<T>
 
     public override string ToString()
     {
-        return base.ToString();
+        string elements = "\n Movies from most recently inserted \n";
+
+        for(int i = top-1; i >=0; i--) {
+            elements += "   " + this.VStack[i].ToString().PadRight(15) + "\n";
+        }
+
+        return elements;
     }
 
     public override int GetHashCode()
     {
         return base.GetHashCode();
-    }
-
-    public int GetRandomCode(int minValues, int maxValues)
-    {
-        Random rd = new Random();
-        return rd.Next(minValues, maxValues);
     }
 
 }

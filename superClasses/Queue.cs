@@ -17,7 +17,7 @@ using System.Collections.Generic;
         Remove to Exclude an element from Head, GetHeadElement that returns the Head element,
          Contains to check whether an object is stored in the queue
           and Find that finds an object located in the queue.
-*/
+*/ 
 public class Queue<T> : IEnumerable<T>
 {
     private Node<T> head = null;
@@ -37,14 +37,14 @@ public class Queue<T> : IEnumerable<T>
         Current = null;
     }
 
-    public Node<T> Previous()
-    {
-        return Current.previous;
-    }
+    //public Node<T> Previous()
+    //{
+        //return Current.Previous;
+    //}
 
     public Node<T> Next()
     {
-        return Current.next;
+        return Current.Next;
     }
 
     public virtual void Add(T obj)
@@ -53,7 +53,11 @@ public class Queue<T> : IEnumerable<T>
         if (this.Tail != null)
             previous = this.Tail;
 
-        Node<T> newNode = new Node<T>(obj, previous, null);
+        //Node<T> newNode = new Node<T>(obj, previous, null);
+
+        //Node<T> newNode = new Node<T>(obj, previous, null);
+
+        Node<T> newNode = new Node<T>(obj, null);
 
         if (this.Length == 0)
         {
@@ -68,8 +72,8 @@ public class Queue<T> : IEnumerable<T>
                 testObject.quantity += 1;
             else
             {
-                newNode.previous = this.Tail;
-                this.Tail.next = newNode;
+                //newNode.Previous = this.Tail;
+                this.Tail.Next = newNode;
                 this.Tail = newNode;
             }
         }
@@ -83,20 +87,20 @@ public class Queue<T> : IEnumerable<T>
         {
             if (this.Current == this.Tail)
             {
-                this.Tail = this.Current.previous;    
-                this.Current.previous.next = null;
-                this.Current.previous = null;
+                //this.Tail = this.Current.Previous;    
+                //this.Current.Previous.Next = null;
+                //this.Current.Previous = null;
             }
             else
             {
                 if (this.Current == this.Head)
                 {
-                    this.Current.next.previous = null;
-                    this.Head = this.Current.next;
+                    //this.Current.Next.Previous = null;
+                    this.Head = this.Current.Next;
                 }
                 else{
-                    this.Current.next.previous = this.Current.previous;
-                    this.Current.previous.next = this.Current.next;
+                    //this.Current.Next.Previous = this.Current.Previous;
+                    //this.Current.Previous.Next = this.Current.Next;
                 }
             }
 
@@ -111,11 +115,11 @@ public class Queue<T> : IEnumerable<T>
         if ((this is not null)
          && (this.Head is not null))
         {
-            Node<T> afterNode = this.Head.next;
-            headObj = this.head.NodeObject;
+            Node<T> afterNode = this.Head.Next;
+            headObj = this.head.Content;
 
-            this.Head.next = null;
-            afterNode.previous = null;
+            this.Head.Next = null;
+            //afterNode.Previous = null;
 
             this.Head = afterNode;
 
@@ -156,8 +160,8 @@ public class Queue<T> : IEnumerable<T>
 
         while (this.Current != null)
         {
-            yield return this.Current.NodeObject;
-            this.Current = this.Current.next;
+            yield return this.Current.Content;
+            this.Current = this.Current.Next;
         }
     }      
 

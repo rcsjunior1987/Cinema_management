@@ -6,7 +6,7 @@ using System;
         Each Person has a unique GUID to ensure there is no
           collision for people sharing the same name.
 */
-
+ 
 public class Person : IComparable
 {
     private string name;

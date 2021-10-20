@@ -28,48 +28,60 @@ namespace Cinema_management
                         It is the menu UI of the project to execute the requirements of the project.
                     */
                     case 1:
-                        // List Available Bikes
-                        bikeStore.ListAvailableBikes();
-                        continue;
-                    case 2:
-                        // List hired Bikes
-                        bikeStore.ListAllHiredBikes();
-                        continue;
-                    case 3:
-                        // List Bikes Fixing
-                        bikeStore.ListAllBikeOnRepair();
-                        continue;    
-                    case 4:
-                        // Hire an Bike
-                        bikeStore.HireBike();
-                        continue;
-                    case 5:
-                        // Return an Bike
-                        bikeStore.ReturnBike();
-                        continue;
-                    case 6:
-                        // Insert a new Bike
-                        bikeStore.SetNewBike();
-                        continue;
-                    case 7:
-                        // Send a bike to be fixed
-                        bikeStore.SetRepairBike();
-                        continue;
-                    case 8:
-                        // Return a fixed bike
-                        bikeStore.PopRepairedBike();
-                        continue;
-                    case 9:
-                        // List all Customers
-                        bikeStore.ListAllCustomers();
-                        continue;
-                    case 10:
                         // Add Customers
                         bikeStore.SetNewCustomer();
                         continue;
+                        // List Available Bikes
+                        //bikeStore.ListAvailableBikes();
+                    case 2:
+                        // Add Customers
+                        //bikeStore.ListAllHiredBikes();
+                        bikeStore.DeleteCustomer();
+                        continue;
+                    case 3:
+                        // List Bikes Fixing
+                        //bikeStore.ListAllBikeOnRepair();
+
+                        // List all Customers
+                        bikeStore.ListAllCustomers();
+                        Console.ReadLine();
+                        continue;   
+                    case 4:
+                        // Hire an Bike
+                        //bikeStore.HireBike();
+
+                        // Insert a new Movie
+                        bikeStore.SetNewMovie();
+                        continue;
+                    case 5:
+                        // Return an Bike 
+                        //bikeStore.ReturnBike();
+                        bikeStore.ListAllMovies();
+                        continue;
+                    case 6:
+                        // Insert a new Bike
+                        //bikeStore.SetNewMovie();
+                        continue;
+                    case 7:
+                        // Insert a new Movie
+                        //bikeStore.SetNewMovie();;
+                        continue;
+                    case 8:
+                        // Return a fixed bike
+                        //bikeStore.PopRepairedBike();
+                        continue;
+                    case 9:
+                        // List all Customers
+                        //bikeStore.ListAllCustomers();
+                        //Console.ReadLine();
+                        continue;
+                    case 10: 
+                        // Add Customers
+                        //bikeStore.SetNewCustomer();
+                        continue;
                     case 11:
                         // Delete Customers
-                        bikeStore.DeleteCustomer();
+                        //bikeStore.DeleteCustomer();
                         continue;
                     case 0:
                         exit = true;
@@ -89,17 +101,23 @@ namespace Cinema_management
             { 
                 Console.WriteLine();
                 Console.WriteLine("Please select from the following options:");
-                Console.WriteLine("1. List Available Bike");
-                Console.WriteLine("2. List hired bikes");
-                Console.WriteLine("3. List Bikes being fixed");
-                Console.WriteLine("4. Hire a Bike");
-                Console.WriteLine("5. Return a Bike");
-                Console.WriteLine("6. Insert a new Bike");
-                Console.WriteLine("7. Send a bike to repair");
-                Console.WriteLine("8. Return a fixed bike");
-                Console.WriteLine("9. List all Customers");
-                Console.WriteLine("10. Add Customers");
-                Console.WriteLine("11. Delete Customers");
+
+                Console.WriteLine("1. Add Customers");
+                Console.WriteLine("2. Delete Customers");
+                Console.WriteLine("3. List all Customers");
+                Console.WriteLine("4. Insert a new movie");
+                Console.WriteLine("5. List all movies");
+
+                //Console.WriteLine("1. List Available Bike");
+                //Console.WriteLine("2. List hired bikes");
+                //Console.WriteLine("3. List Bikes being fixed");
+                //Console.WriteLine("4. Hire a Bike");
+                //Console.WriteLine("5. Return a Bike");
+                //Console.WriteLine("7. Send a bike to repair");
+                //Console.WriteLine("8. Return a fixed bike");
+
+                //Console.WriteLine("8. List all movies");
+                
                 Console.WriteLine("0. Quit");
                 Console.WriteLine();
 

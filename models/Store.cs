@@ -3,25 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Store
-{
+{ 
     private int quantityBikes;
-    private AvailableBikesQueue availableBikes;
-    private CustomerList customers;
-    private RepairBikesStack repairBikes;
-    private RentalList rentals;
     public int QuantityBikes { get => quantityBikes; set => quantityBikes = value; }
-    public CustomerList Customers { get => customers; set => customers = value; }
-    public RepairBikesStack RepairBikes { get => repairBikes; set => repairBikes = value; }
-    public AvailableBikesQueue AvailableBikes { get => availableBikes; set => availableBikes = value; }
-    public RentalList Rentals { get => rentals; set => rentals = value; }
 
+    private MoviesStack moviesCollection;
+    public MoviesStack MoviesCollection { get => moviesCollection; set => moviesCollection = value; }
+
+    private CustomerList customers;
+    public CustomerList Customers { get => customers; set => customers = value; }
+
+    private RentalList rentals;
+    
+    public RentalList Rentals { get => rentals; set => rentals = value; }
+ 
     public Store()
         {
             this.QuantityBikes = 50;
 
             this.Customers = new CustomerList();
-            this.AvailableBikes = new AvailableBikesQueue();
-            this.RepairBikes = new RepairBikesStack();
+            this.MoviesCollection = new MoviesStack();
+            //this.RepairBikes = new RepairBikesStack();
             this.Rentals = new RentalList();
 
             this.SetAvailableBikes();
@@ -54,24 +56,29 @@ public class Store
                 brandDescription = "bikebrand";
                 yearMade = "2021";
 
-                Bike bike = new Bike(description
+                /*Bike bike = new Bike(description
                                    , brandDescription
                                    , yearMade
                                    );
 
-                AvailableBikes.Add(bike);
+                AvailableBikes.Add(bike);*/
             }
+        }
+
+        public void ListAllMovies() {
+            Console.Write(this.MoviesCollection.ToString());
+            Console.ReadLine();
         }
 
         public void ListAvailableBikes() 
         {
-            Console.Write("\n" + AvailableBikes.ToString());
+            //Console.Write("\n" + AvailableBikes.ToString());
             Console.ReadLine();
         }
 
         public void SetRepairBike()
         {
-            Bike bike = null;
+            /*Bike bike = null;
 
             while (bike is null)
             {
@@ -87,12 +94,12 @@ public class Store
             this.AvailableBikes.Remove(bike);
 
             Console.WriteLine("Bike: " + bike.ToString() + " is being repaired!");
-            Console.ReadKey();
+            Console.ReadKey();*/
         }
 
         public void PopRepairedBike()
         {
-            if (this.RepairBikes.Top == 0)
+            /*if (this.RepairBikes.Top == 0)
             {
                 Console.WriteLine("There are no bikes being fixed in this moment!");
                 Console.ReadKey();
@@ -104,13 +111,13 @@ public class Store
 
                 Console.WriteLine("Bike: " + bikeFixed.ToString() + " is now available!");
                 Console.ReadKey();
-            }
+            }*/
 
         }
 
-        private Bike GetAvailableBike() 
+        private Movie GetAvailableBike() 
         {
-            Bike bike = null;
+            /*Movie bike = null;
 
             if (AvailableBikes is not null)
             {
@@ -128,17 +135,18 @@ public class Store
                 Console.ReadLine().ToUpper();
             }
             
-            return bike;
+            return bike;*/
+            return null;
         }
 
         public void HireBike()
         {
             Customer customer = null;
 
-            while (customer is null)
+            /*while (customer is null)
             {
                 customer = this.GetCustomer();
-                customer = Customers.FindCustomerByCode(customer);
+                customer = Customers.Search(customer);
 
                 if(customer is not null)
                 {
@@ -157,13 +165,13 @@ public class Store
                 }
                 else
                     Console.WriteLine("\n Customer does not exist!");
-            }    
+            }*/    
 
         }
 
         public void ReturnBike()
         {
-            Customer customer = null;
+            /*Customer customer = null;
 
             while (customer is null)
             {
@@ -198,15 +206,15 @@ public class Store
                 else
                     Console.WriteLine("\n Customer does not exist!");
 
-            }   
+            }*/   
         }
 
-        private Bike GetHiredBike()
+        private Movie GetHiredBike()
         {
             string input;
             int selected = 0;
 
-            Bike bike = new Bike();
+            Movie bike = new Movie();
 
             bool exit = false;
 
@@ -218,7 +226,6 @@ public class Store
 
                 bool validInput = Int32.TryParse(input, out int selection);
 
-                bike.Code = selection;
                 exit = true;
             }
 
@@ -228,17 +235,20 @@ public class Store
         public void SetNewCustomer()
         {
             Customer newCustomer = this.GetNewCustomer();
+
             this.Customers.Add(newCustomer);
+            this.Customers.Sort();
         }
 
         public void DeleteCustomer()
         {
+            this.ListAllCustomers();    
+
             Customer customer = null;
 
             while (customer is null)
             {
-                customer = this.GetCustomer();
-                customer = Customers.FindCustomerByCode(customer);
+                customer  = this.GetCustomer();
 
                 if(customer is not null)
                 {
@@ -257,6 +267,7 @@ public class Store
 
             string name = "";
             string phoneNumber = "";
+            string paymentMethod = "";
 
             bool exit = false;
 
@@ -264,7 +275,7 @@ public class Store
             {
                 if (name.ToUpper() != "CANCEL")
                 {
-                    Console.WriteLine("\n Please Enter the name of the new customer or [CANCEL] to abort the operation!");
+                    Console.WriteLine("\n Please Enter the NAME of the new customer or [CANCEL] to abort the operation!");
 
                     name = Console.ReadLine().ToUpper();
                 } else
@@ -275,9 +286,22 @@ public class Store
 
                 if (phoneNumber.ToUpper() != "CANCEL")
                 {
-                    Console.WriteLine("\n Please Enter the phone number of the new customer or [CANCEL] to abort the operation!");
+                    Console.WriteLine("\n Please Enter the PHONE NUMBER or [CANCEL] to abort the operation!");
 
                     phoneNumber = Console.ReadLine().ToUpper();
+
+                    exit = true;
+                } else
+                {
+                    customer = null;
+                    exit = true;
+                }
+
+                if (paymentMethod.ToUpper() != "CANCEL")
+                {
+                    Console.WriteLine("\n Please Enter the PAYMENT METHOD or [CANCEL] to abort the operation!");
+
+                    paymentMethod = Console.ReadLine().ToUpper();
 
                     exit = true;
                 } else
@@ -290,23 +314,27 @@ public class Store
 
             customer.Name = name;
             customer.PhoneNumber = phoneNumber;
+            customer.PaymentMethod = paymentMethod;
 
             return customer;
         }
 
-        public void SetNewBike()
+        public void SetNewMovie()
         {
-            Bike bike = this.GetNewBike();
-            this.AvailableBikes.Add(bike);
+            Movie movie = this.GetNewMovie();
+            this.MoviesCollection.Push(movie);
+
+            Console.WriteLine(this.MoviesCollection.ToString());
+
+            Console.ReadLine().ToUpper();
         }
 
-        private Bike GetNewBike()
+        private Movie GetNewMovie()
         {
-            Bike bike = new Bike();
+            Movie movie = new Movie();
 
             string description = "";
-            string brandDescription = "";
-            string yearMade = "";
+            string year = "";
 
             bool exit = false;
 
@@ -314,7 +342,7 @@ public class Store
             {
                 if (description.ToUpper() != "CANCEL")
                 {
-                    Console.WriteLine("\n Please Enter the description of the new bike or [CANCEL] to abort the operation!");
+                    Console.WriteLine("\n Please Enter the description of the movie or [CANCEL] to abort the operation!");
 
                     description = Console.ReadLine().ToUpper();
                 } else
@@ -323,39 +351,25 @@ public class Store
                     exit = true;
                 }
 
-                if (brandDescription.ToUpper() != "CANCEL")
+                if (year.ToUpper() != "CANCEL")
                 {
-                    Console.WriteLine("\n Please Enter the brand of the new bike or [CANCEL] to abort the operation!");
+                    Console.WriteLine("\n Please Enter the year of the movie or [CANCEL] to abort the operation!");
 
-                    brandDescription = Console.ReadLine().ToUpper();
+                    year = Console.ReadLine().ToUpper();
 
                     exit = true;
                 } else
                 {
-                    brandDescription = null;
-                    exit = true;
-                }
-
-                if (yearMade.ToUpper() != "CANCEL")
-                {
-                    Console.WriteLine("\n Please Enter the year of the new bike or [CANCEL] to abort the operation!");
-
-                    yearMade = Console.ReadLine().ToUpper();
-
-                    exit = true;
-                } else
-                {
-                    yearMade = null;
+                    year = null;
                     exit = true;
                 }
 
             }
 
-            bike.Description = description;
-            bike.BrandDescription = brandDescription;
-            bike.YearMade = yearMade;
+            movie.Description = description;
+            movie.Year = year;
 
-            return bike;
+            return movie;
         }
 
         private Customer GetCustomer()
@@ -379,32 +393,27 @@ public class Store
 
         public void SetCustomers()
         {   
-            Customer customer1 = new Customer("Beto Carlos", "33 3333-3333");
-            Customer customer2 = new Customer("Luan Carlos", "11 1111-1111");
-            Customer customer3 = new Customer("Alexandra Ramos", "22 2222-2222");
-            Customer customer4 = new Customer("Zarlos Carlos", "33 3333-3333");
 
-            this.Customers.Add(customer1);
-            this.Customers.Add(customer2);
-            this.Customers.Add(customer3);
-            this.Customers.Add(customer4);
+            for (int i = 1; i<= 5; i++) {
+                Customer newCustomer = new Customer("Customer" + i.ToString(), "phoneNumber" + i.ToString(), "card", 0);
+                this.Customers.Add(newCustomer);
+            }
+
+            this.Customers.Sort();
         }
 
         public void ListAllCustomers()
         {
-            LinkedList<Customer> customersOrderedByName = Customers.SortByCustomerName();
-
-            foreach(Customer c in customersOrderedByName)
+            foreach(Customer c in this.Customers)
             {
                  Console.WriteLine(c.ToString());
             }
-
-            Console.ReadLine();
+            
         }
 
         public void ListAllHiredBikes()
         {
-            LinkedList<Rental> bikesHired = Rentals.SortByCustomerName();
+            /*DoublyLinkedList<Rental> bikesHired = Rentals.SortByCustomerName();
 
             if (bikesHired.Length == 0)
                 Console.WriteLine("There are no hired Bikes!");
@@ -416,15 +425,15 @@ public class Store
                 }
             }
 
-            Console.ReadLine();
+            Console.ReadLine();*/
         }
 
         public void ListAllBikeOnRepair()
         {
-            if (RepairBikes.Top == 0)
+            /*if (RepairBikes.Top == 0)
                 Console.WriteLine("There is no Bike being fixed in thie moment!");
             else
-                Console.WriteLine(RepairBikes.ToString());
+                Console.WriteLine(RepairBikes.ToString());*/
 
             Console.ReadLine();
         }

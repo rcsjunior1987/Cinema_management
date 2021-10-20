@@ -7,7 +7,7 @@ public class GenericStack<T> : Stack<T>
         public GenericStack() : base() { }
 
         public override void Push(T obj)
-        {
+        { 
             base.Push(obj);
         }
 

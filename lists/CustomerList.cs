@@ -3,8 +3,8 @@ using System;
 /*
  Extends GenericList for a doubly-linked list of Customer objects
    sorted by name, when it is requested to list all customers.
-*/
-public class CustomerList : GenericList<Customer>
+*/ 
+public class CustomerList : GenericLinkedList<Customer>
     {
         public CustomerList() : base() { }
 
@@ -20,74 +20,112 @@ public class CustomerList : GenericList<Customer>
             return returnString;
         }
 
-        public void Add(Customer customer) {
+        public override void Add(Customer customer) {
 
             int code = 0;
 
-            if (this.Length > 0) {
+            if (this.Head != null) {
 
                 foreach (Customer c in this)
                 {
                     if (code < c.Code || code == 0)
                         code = c.Code;
-                    
                 }
-
             }
 
             customer.Code = ++code;
-
+    
             base.Add(customer);
         }
 
-        public Customer FindCustomerByCode(Customer obj)
+        public override void Sort()
         {
+            // initially, no nodes in sorted list so its set to null 
+            Node<Customer> current = this.Head;
+            Node<Customer> sortedHead  = null;
+
+            // traverse the linked list and add sorted node to sorted list
+            while (current != null)
+            {
+                // Store current.next in next
+                Node<Customer> currentNext = current.Next;
+              
+                // current node goes in sorted list 
+                sortedHead = sortedInsert(sortedHead, current);
+
+                // now next becomes current 
+                current = currentNext;
+            }
+
+            // update head to point to linked list
+            this.Head = sortedHead;
+        }
+
+        public override Node<Customer> Search(Customer obj)
+        {
+            // Traverse the doubly linked list
             foreach (Customer customer in this)
             {
-                if (customer.Code.Equals(obj.Code))
-                    return customer;
+                // Returns Customer found
+                if (customer.Code.Equals(obj.Code)) {
+                    return this.Current;
+                }
             }
+            // otherwise returns null whether not found the object searched
             return null;
         }
 
-        public LinkedList<Customer> SortByCustomerName()
-        {
-            LinkedList<Customer> orderedListByname = new LinkedList<Customer>();
+        public override void Remove(Customer obj) {
 
-            foreach(Customer newObj in this)
-            {    
-                Node<Customer> newNode = null;
+            Node<Customer> previous = null;
 
-                if (orderedListByname.Length == 0)
-                {
-                    newNode = new Node<Customer>(newObj, null, null);
-                    
-                    orderedListByname.head = newNode;
-                    orderedListByname.tail = newNode;
-                    ++orderedListByname.Length;
-                }
-                else
-                {
-                    if (newObj.Name.CompareTo(orderedListByname.head.NodeObject.Name) < 0)
-                    {
-                        newNode = new Node<Customer>(newObj, null, orderedListByname.head);
-                        orderedListByname.head.previous = newNode;
-                        orderedListByname.head = newNode;
+            // Traverse the doubly linked list
+            foreach (Customer customer in this)
+            {
+                // Finds element searched in the list
+                if (customer.Code.Equals(obj.Code)) {
 
-                        ++orderedListByname.Length;
-                    }
+                    // If the element searched is Head   
+                    if (this.Head == this.Current)
+                        // It receives the first element after head
+                        this.Head = this.Head.Next;                        
                     else
-                    {
-                        newNode = new Node<Customer>(newObj, orderedListByname.tail, null);
-                        orderedListByname.tail.next = newNode;
-                        orderedListByname.tail = newNode;
-
-                        ++orderedListByname.Length;
-                    }
+                        // Otherwise, the first element before the searched one
+                        //  receive one after it
+                        previous.Next = this.Current.Next;
                 }
+                
+                // To keeps the lement before Current
+                previous = this.Current;
             }
 
-            return orderedListByname;
+            // Sort the list
+            this.Sort();
         }
+
+        private Node<Customer> sortedInsert(Node<Customer> sortedHead, Node<Customer> newNode)
+        {
+
+            //for head node
+            if(sortedHead == null
+            || sortedHead.Content.Code >= newNode.Content.Code)
+            {
+                newNode.Next = sortedHead;
+                return newNode;
+            }
+            else
+            {
+                Node<Customer> current = sortedHead;
+
+                //find the node and then insert
+                while(current.Next != null
+                   && current.Next.Content.Code < newNode.Content.Code)
+                    current = current.Next;
+                newNode.Next = current.Next;
+                current.Next = newNode;
+            }
+            
+            return sortedHead;
+        } 
 
     }

@@ -3,8 +3,8 @@ using System;
 /*
     Extends GenericList for a doubly-linked list of Rental objects
       sorted by the Customer Name, when it is requested to list all rentals.
-*/
-public class RentalList : GenericList<Rental>
+*/ 
+public class RentalList : GenericLinkedList<Rental>
 {
         public RentalList() : base() { }
 
@@ -12,17 +12,17 @@ public class RentalList : GenericList<Rental>
         {
             string returnString = "";
 
-            foreach (Rental rental in this)
+            /*foreach (Rental rental in this)
             {
                 returnString += rental.Customer.ToString().PadRight(15) + "\n";
-            }
+            }*/
 
             return returnString;
         }
 
         public void Add(Rental rental) {
 
-            int code = 0;
+            /*int code = 0;
 
             if (this.Length > 0) {
 
@@ -36,12 +36,12 @@ public class RentalList : GenericList<Rental>
 
             rental.Code = ++code;
 
-            base.Add(rental);
+            base.Add(rental);*/
         }
 
         public Rental GetRental(Rental obj)
         {
-            foreach (Rental rental in this)
+            /*foreach (Rental rental in this)
             {
                 if (rental.Customer.Code.Equals(obj.Customer.Code))
                 {
@@ -49,13 +49,13 @@ public class RentalList : GenericList<Rental>
                         return rental;
                 }
                 
-            }
+            }*/
             return null;
         }
 
         public LinkedList<Rental> SortByCustomerName()
         {
-            LinkedList<Rental> rentalList = new LinkedList<Rental>();
+            /*DoublyLinkedList<Rental> rentalList = new DoublyLinkedList<Rental>();
 
             foreach(Rental newObj in this)
             {    
@@ -65,32 +65,34 @@ public class RentalList : GenericList<Rental>
                 {
                     newNode = new Node<Rental>(newObj, null, null);
                     
-                    rentalList.head = newNode;
-                    rentalList.tail = newNode;
+                    rentalList.Head = newNode;
+                    rentalList.Tail = newNode;
                     ++rentalList.Length;
                 }
                 else
                 {
-                    if (newObj.Customer.Name.CompareTo(rentalList.head.NodeObject.Customer.Name) < 0)
+                    if (newObj.Customer.Name.CompareTo(rentalList.Head.Content.Customer.Name) < 0)
                     {
-                        newNode = new Node<Rental>(newObj, null, rentalList.head);
-                        rentalList.head.previous = newNode;
-                        rentalList.head = newNode;
+                        newNode = new Node<Rental>(newObj, null, rentalList.Head);
+                        rentalList.Head.Previous = newNode;
+                        rentalList.Head = newNode;
 
                         ++rentalList.Length;
                     }
                     else
                     {
-                        newNode = new Node<Rental>(newObj, rentalList.tail, null);
-                        rentalList.tail.next = newNode;
-                        rentalList.tail = newNode;
+                        newNode = new Node<Rental>(newObj, rentalList.Tail, null);
+                        rentalList.Tail.Next = newNode;
+                        rentalList.Tail = newNode;
 
                         ++rentalList.Length;
                     }
                 }
             }
 
-            return rentalList;
+            return rentalList;*/
+
+            return null;
         }
 
     }

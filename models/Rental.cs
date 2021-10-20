@@ -8,6 +8,7 @@ using System.Collections.Generic;
 */
 public class Rental : IComparable
 {
+    /*
     private Bike bike;
     private Customer customer;
     private int code;
@@ -26,13 +27,14 @@ public class Rental : IComparable
         this.Customer = customer;
         this.Bike = bike;
     }
-
+*/
     public override string ToString()
     {
-        return "Bike: "  + this.Bike.Code
+        /*return "Bike: "  + this.Bike.Code
              + " - " +  this.Bike.Description
              + " is hired to "
-             + this.Customer.Name;
+             + this.Customer.Name;*/
+        return null;
     }
 
     public override bool Equals(object obj)
@@ -49,6 +51,6 @@ public class Rental : IComparable
     {
         return 0;
     }
-            
+    
 
 }
