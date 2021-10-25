@@ -8,26 +8,33 @@ public class Movie
     {
         private string description;
         public string Description { get => description; set => description = value; }           
-        private string year;
-        public string Year { get => year; set => year = value; }
         private Guid id;
         public Guid Id { get => id; set => id = value; }
+        private Queue<Screenings> screenings;
+        public Queue<Screenings> Screenings { get => screenings; set => screenings = value; }
 
-        public Movie() { }
+        public Movie() { 
+            this.Screenings = new Queue<Screenings>();
+        }
 
-        public Movie(
-            string description,
-            string year)
+        public Movie(string description)
         {
             this.Description = description;
-            this.Year = year;
             this.id = Guid.NewGuid();
         }
 
         public override string ToString()
         {
-            return " Description: " + this.Description
-                 + ", Year: " + this.Year;
+            string movie = " Description: " + this.Description;
+
+            movie = movie + "\n      Screenings "; 
+
+            foreach(Screenings s in this.Screenings) {
+                movie = movie + "\n         Screenings Id: " + s.Id;
+                movie = movie + ", Seats available: " + s.NumSeats;
+            }
+
+            return movie;
         }
 
         public override bool Equals(object other)
@@ -53,13 +60,7 @@ public class Movie
 
             var otherBike = other as Movie;
 
-            if (this.Equals(otherBike))
-                return 0;
-            if (this.description.CompareTo(otherBike.description) < 0)
-                return -1;
-            if (this.description.CompareTo(otherBike.description) > 0)
-                return 1;
-            return this.Year.CompareTo(otherBike.Year);
+            return this.description.CompareTo(otherBike.description);
         }
 
     }

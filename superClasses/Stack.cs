@@ -59,13 +59,22 @@ public class Stack<T>
 
     public override string ToString()
     {
-        string elements = "\n Movies from most recently inserted \n";
+        string elements = "\n Elements from the most recently inserted \n";
 
         for(int i = top-1; i >=0; i--) {
             elements += "   " + this.VStack[i].ToString().PadRight(15) + "\n";
         }
 
         return elements;
+    }
+
+    public bool IsEmpty() {
+
+        if(Top > 0)
+            return false;
+        else
+            return true;
+
     }
 
     public override int GetHashCode()

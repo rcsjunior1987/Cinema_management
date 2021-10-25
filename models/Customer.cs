@@ -7,8 +7,6 @@ using System.Collections.Generic;
 */ 
 public class Customer : Person
     {
-        private int code;
-        public int Code { get => code; set => code = value; }
         private string phoneNumber;
         public string PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
         private string paymentMethod;
@@ -18,8 +16,6 @@ public class Customer : Person
 
         public Customer() : base() { }
         
-        public Customer(string name) : base(name) { }
-
         public Customer(string name
                       , string phoneNumber
                       , string paymentMethod
@@ -33,8 +29,7 @@ public class Customer : Person
 
         public override string ToString()
         {
-            return "Code: " + this.Code 
-                 + ", " + base.ToString()
+            return base.ToString()
                  + ", Phone Number: " + this.PhoneNumber
                  + ", Payment Method: " + this.PaymentMethod
                  + ", Quantity of movies watched: " + this.HowManyScreenings;
@@ -49,4 +44,5 @@ public class Customer : Person
         {
             return base.GetHashCode();
         }
+
 }

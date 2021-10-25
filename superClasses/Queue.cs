@@ -21,139 +21,74 @@ using System.Collections.Generic;
 public class Queue<T> : IEnumerable<T>
 {
     private Node<T> head = null;
-    private Node<T> tail = null;
-    private Node<T> current = null;
-    private int length = 0;
     public Node<T> Head { get => head; set => head = value; }
-    public Node<T> Tail { get => tail; set => tail = value; }
+
+    private Node<T> tail = null;
+    public Node<T> Tail { get => tail; set => tail = value; } 
+
+    private Node<T> current = null;
     public Node<T> Current { get => current; set => current = value; }
-    public int Length { get => length; set => length = value; }
 
     public Queue()
     {
-        this.Length = 0;
         this.Head = null;
-        this.Tail = null;
-        Current = null;
+        this.Current = null;
     }
 
-    //public Node<T> Previous()
-    //{
-        //return Current.Previous;
-    //}
-
-    public Node<T> Next()
+    public void Enqueue(T obj)
     {
-        return Current.Next;
-    }
-
-    public virtual void Add(T obj)
-    {
-        Node<T> previous = null;
-        if (this.Tail != null)
-            previous = this.Tail;
-
-        //Node<T> newNode = new Node<T>(obj, previous, null);
-
-        //Node<T> newNode = new Node<T>(obj, previous, null);
-
         Node<T> newNode = new Node<T>(obj, null);
 
-        if (this.Length == 0)
-        {
-            this.Head = newNode;
-            this.Tail = newNode;
-            this.Current = newNode;
-        }
-        else
-        {
-            Node<T> testObject = this.Find(obj);
-            if (testObject != null)
-                testObject.quantity += 1;
+        // Check if It is the first element to be inserted
+        if (this.Head == null
+         && this.Tail == null)
+            // If so, this elements becomes the Head and Tail
+            this.Head = this.Tail = newNode;
+        else {
+            // If there is already an element in the queue
+            if (this.Head.Next == null)
+                // This elements is inserted in the first position after Head
+                this.Head.Next = newNode;
             else
-            {
-                //newNode.Previous = this.Tail;
+                // If there is already more than one an element in the queue, 
+                // The new element is inserted in the first position after Tail
                 this.Tail.Next = newNode;
-                this.Tail = newNode;
-            }
+            // New element becomes Tail
+            this.Tail = newNode;
         }
-
-        this.Length += 1;
+        
     }
 
-    public virtual void Remove()
-    {
-        if (this.Length > 0)
-        {
-            if (this.Current == this.Tail)
-            {
-                //this.Tail = this.Current.Previous;    
-                //this.Current.Previous.Next = null;
-                //this.Current.Previous = null;
-            }
-            else
-            {
-                if (this.Current == this.Head)
-                {
-                    //this.Current.Next.Previous = null;
-                    this.Head = this.Current.Next;
-                }
-                else{
-                    //this.Current.Next.Previous = this.Current.Previous;
-                    //this.Current.Previous.Next = this.Current.Next;
-                }
-            }
+    public T DeQueue() {
 
-            --this.Length;
-        }
-    }
+        T obj;
 
-    public virtual T GetHeadElement()
-    {
-        T headObj;
+        if (this.Head != null) {
+            obj = this.Head.Content;
+            this.Head = this.Head.Next;
 
-        if ((this is not null)
-         && (this.Head is not null))
-        {
-            Node<T> afterNode = this.Head.Next;
-            headObj = this.head.Content;
+            if (this.Head == null)
+                this.Tail = null;
 
-            this.Head.Next = null;
-            //afterNode.Previous = null;
-
-            this.Head = afterNode;
-
-            return headObj;
+            return obj;
         }
 
         return default(T);
     }
 
-    public virtual bool Contains(T obj)
-    {
-        foreach (T element in this)
-        {
-            if (element.Equals(obj))
-                return true;
+    public T Peek() {
+
+        T obj;
+
+        if (this.Head != null) {
+            obj = this.Head.Content;
+
+            return obj;
         }
-        return false;
-    }
 
-    public virtual Node<T> Find(T obj)
-    {
-        if (this.Contains(obj))
-            return this.Current;
-        return null;
+        return default(T);
     }
-
-    public virtual int GetQuantity(T obj)
-    {
-        Node<T> testObject = this.Find(obj);
-        if (testObject != null)
-            return testObject.quantity;
-        return 0;
-    }
-
+    
     public IEnumerator<T> GetEnumerator()
     {
         this.Current = this.Head;
@@ -169,5 +104,5 @@ public class Queue<T> : IEnumerable<T>
     {
         throw new NotImplementedException();
     }
-        
+          
 }

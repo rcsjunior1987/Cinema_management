@@ -23,7 +23,8 @@ public class Person : IComparable
     }
 
     public override string ToString() {
-        return "Name: " + this.Name;
+        return " ID: " + this.Id
+             + ", Name: " + this.Name;
     }
 
     public override bool Equals(object other)
@@ -47,17 +48,10 @@ public class Person : IComparable
         if (other == null)
             return 1;
 
-        var otherPerson = other as Person;
+        var otherCustomer = other as Customer;
 
-        /* A Person is ordered based on his name */
-        if (this.Equals(otherPerson))
-            return 0;
-        if (this.name.CompareTo(otherPerson.name) < 0)
-            return -1;
-        if (this.name.CompareTo(otherPerson.name) > 0)
-            return 1;
-                               
-        return this.name.CompareTo(otherPerson.name);
+        // A Person is ordered based on last name first, then first name
+        return this.Name.ToUpper().CompareTo(otherCustomer.Name.ToUpper());
     }
     
 }
