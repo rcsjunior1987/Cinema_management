@@ -23,7 +23,7 @@ namespace Cinema_management
                 int selectedOption = GetMainOption();
 
                 switch (selectedOption)
-                {
+                { 
                     /*
                         It is the menu UI of the project to execute the requirements of the project.
                     */

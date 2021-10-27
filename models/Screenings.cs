@@ -2,26 +2,33 @@ using System;
 using System.Collections.Generic;
 
 /*
-    Class rental which extends IComparable,
-      which allows items to be stored in a SortedLinkedList.
-       a Rental is represents a bike hired by a customer.
+    Class Screenings which extends IComparable,
+      which allows items to be stored in Queues.
+       It represents screenings of movies.
 */
 public class Screenings : IComparable
 {
+    /* Id of Screenings */
     private Guid id;
     public Guid Id { get => id; set => id = value; }
+
+    /* Quantity of seats */
     private int numSeats;
     public int NumSeats { get => numSeats; set => numSeats = value; }
-    //private Movie movie;
-    //public Movie Movie { get => movie; set => movie = value; }
+
+    /* Array of seats */
     private Seat[] seats;
     public Seat[] Seats { get => seats; set => seats = value; }
 
     public Screenings() {
-        this.Id = Guid.NewGuid();
-        this.NumSeats = 1;
 
-        //this.Movie = new Movie();
+        // Generates an unique Id
+        this.Id = Guid.NewGuid();
+
+        // Definies the quantity of seat
+        this.NumSeats = 20;
+
+        // Creates the seats
         this.Seats = new Seat[this.NumSeats];
     }
     

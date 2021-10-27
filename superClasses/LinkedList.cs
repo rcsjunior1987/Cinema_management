@@ -1,21 +1,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 
 /*
     This class represents a linked list, in which the elements are not stored at contiguous memory locations.
-    It keeps Head, Tail, and Current elements as in Queue. However, the classes extended from LinkedList can be sorted.
-     The element to be added not always goes to Head, and Tail is not always the one to be removed.
+    It keeps Head, and Current elements as in Queue. However, the classes extended from LinkedList can be sorted.
+     The element to be added always goes to Head.
 */
 public class LinkedList<T> : IEnumerable<T> where T : IComparable
     {
-        private Node<T> head = null;
-        public Node<T> Head { get => head; set => head = value; }         
-        private Node<T> current = null;
+        // Head of Linked List
+        private Node<T> head;
+        public Node<T> Head { get => head; set => head = value; }
+        private Node<T> current;
         public Node<T> Current { get => current; set => current = value; }
 
-        public LinkedList() { }
+        public LinkedList() {
+            // Sets Null to Head and Current
+            //   when object of LinkedList is created 
+            this.Head = null;
+            this.Current = null;
+        }
 
         /* Adds an object in the end of the list. */
         public virtual void Add(T obj)
@@ -59,6 +64,7 @@ public class LinkedList<T> : IEnumerable<T> where T : IComparable
             this.Sort();
         }
 
+        /* Sequencial search to find elements in the LinkedList */
         public T Find(T obj) {
 
             // Traverse the list
@@ -74,6 +80,7 @@ public class LinkedList<T> : IEnumerable<T> where T : IComparable
             return default(T);
         }
 
+        /* Selection sort */
         public void Sort()
         {
             // initially, no nodes in sorted list so its set to null 
@@ -138,6 +145,7 @@ public class LinkedList<T> : IEnumerable<T> where T : IComparable
             throw new NotImplementedException();
         }
         
+        /* Returns the string with the object attributes */
         public string ToString()
         {
             string returnString = "";

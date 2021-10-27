@@ -5,6 +5,9 @@ using System.Collections.Generic;
 /*
     This class is a linear data structure in which the insertion and deletion of elements occur at one end only,
       rather than in the middle.
+    It contains the methods Push to insert a new element at the top of the Stack,
+     Pop that removes an element in the top of the Stack. And PeepTop that return the element that lies
+      at the top of the Stack without remove it.
 */
 public class Stack<T>
 { 

@@ -10,22 +10,23 @@ using System.Collections.Generic;
         and it represents the element located in the first position of the Queue.
        The object Tail stores the element in the last position of the Queue,
         whereas Current is the actual element being manipulated.
-       Among the Head and Tail are stored elements gathered by Nodes elements previous
-        and next that represent which element lies in a one before position,
-        and next is the element that lies in one after position.
-       To conclude, Queue has the methods Add to add new object always in Tail,
-        Remove to Exclude an element from Head, GetHeadElement that returns the Head element,
-         Contains to check whether an object is stored in the queue
-          and Find that finds an object located in the queue.
+       Among the Head and Tail are stored elements gathered by Nodes elements next that represent
+        which element lies in a one afet position.        
+       To conclude, Queue has the methods Enqueue to add new object always in Tail,
+         DeQueue to Exclude an element from Head, And Peek that returns the Head of the Queue 
+          without remove it.
 */ 
 public class Queue<T> : IEnumerable<T>
 {
+    /* Attributes Head */
     private Node<T> head = null;
     public Node<T> Head { get => head; set => head = value; }
 
+    /* Attributes Tail */
     private Node<T> tail = null;
     public Node<T> Tail { get => tail; set => tail = value; } 
 
+    /* Attributes Current */
     private Node<T> current = null;
     public Node<T> Current { get => current; set => current = value; }
 
@@ -63,11 +64,17 @@ public class Queue<T> : IEnumerable<T>
 
         T obj;
 
+        // Check if head is not null
         if (this.Head != null) {
+            // If not so, obj received the content in Head
             obj = this.Head.Content;
+
+            // Head Received the next element of Head
             this.Head = this.Head.Next;
 
+            // If Head is null
             if (this.Head == null)
+                // Tail also receives null
                 this.Tail = null;
 
             return obj;
@@ -80,9 +87,13 @@ public class Queue<T> : IEnumerable<T>
 
         T obj;
 
+        // Check if head is not null
         if (this.Head != null) {
+
+            // If not so, obj received the content in Head
             obj = this.Head.Content;
 
+            // Returns obj
             return obj;
         }
 

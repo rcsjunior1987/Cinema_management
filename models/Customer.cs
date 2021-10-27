@@ -2,15 +2,21 @@ using System;
 using System.Collections.Generic;
 
 /*
-    Customer class extended by  Person, which extends IComparable,
-      which allows items to be stored in a SortedLinkedList.
+    Customer class extended by Person, which extends IComparable,
+      which allows items to be stored in a LinkedList.
 */ 
 public class Customer : Person
     {
+
+        /* Phone number of the customer */
         private string phoneNumber;
         public string PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
+
+        /* Payment method used by customer */
         private string paymentMethod;
         public string PaymentMethod { get => paymentMethod; set => paymentMethod = value; }
+
+        /* How many screens have the customer watched */
         private int howManyScreenings;
         public int HowManyScreenings { get => howManyScreenings; set => howManyScreenings = value; }
 
@@ -27,6 +33,7 @@ public class Customer : Person
             this.HowManyScreenings = howManyScreenings;
         }
 
+        /* Returns the string with the costumers attributes */
         public override string ToString()
         {
             return base.ToString()

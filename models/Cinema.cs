@@ -177,16 +177,11 @@ public class Cinema
 
     public void SetNewMovie()
     {
-        if (this.MoviesCollection.IsEmpty()) {
-            Movie movie = this.GetNewMovie();
-            this.MoviesCollection.Push(movie);
-            this.SetNewScreenings(movie);
-            Console.Write(this.MoviesCollection.ToString());
-        } else {
-            Console.WriteLine("A new movie can be added just the actual one finishes!");
-        }
-        Console.ReadLine().ToUpper();
-
+        Movie movie = this.GetNewMovie();
+        this.MoviesCollection.Push(movie);
+        this.SetNewScreenings(movie);
+        Console.Write(this.MoviesCollection.ToString());
+        Console.ReadLine();
     }
 
     public void SetMovie()

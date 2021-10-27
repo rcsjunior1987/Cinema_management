@@ -6,10 +6,15 @@ using System;
 */
 public class Movie
     {
+        /*Description of Movie */
         private string description;
-        public string Description { get => description; set => description = value; }           
+        public string Description { get => description; set => description = value; }
+
+        /* Id of Movie */
         private Guid id;
         public Guid Id { get => id; set => id = value; }
+
+        /*Screenings of Movie */
         private Queue<Screenings> screenings;
         public Queue<Screenings> Screenings { get => screenings; set => screenings = value; }
 
@@ -23,6 +28,7 @@ public class Movie
             this.id = Guid.NewGuid();
         }
 
+        /* Returns the string with attributes of movie */
         public override string ToString()
         {
             string movie = " Description: " + this.Description;

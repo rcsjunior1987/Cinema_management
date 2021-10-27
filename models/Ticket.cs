@@ -2,9 +2,11 @@ using System;
 
 public class Ticket
     {
+        /* Unique Id of Ticket */
         private Guid id;
         public Guid Id { get => id; set => id = value; }
 
+        /* Custumer who bouth the ticket */
         private Customer customer;
         public Customer Customer { get => customer; set => customer = value; }           
         
