@@ -16,6 +16,10 @@ public class Screenings : IComparable
     private int numSeats;
     public int NumSeats { get => numSeats; set => numSeats = value; }
 
+    /* Quantity of seats available */
+    private int numSeatsAvailable;
+    public int NumSeatsAvailable { get => numSeatsAvailable; set => numSeatsAvailable = value; }
+
     /* Array of seats */
     private Seat[] seats;
     public Seat[] Seats { get => seats; set => seats = value; }
@@ -26,7 +30,11 @@ public class Screenings : IComparable
         this.Id = Guid.NewGuid();
 
         // Definies the quantity of seat
-        this.NumSeats = 20;
+        this.NumSeats = 2;
+
+        // Quantity of seats available
+        //  starts with the same number of seats
+        this.NumSeatsAvailable = this.NumSeats;
 
         // Creates the seats
         this.Seats = new Seat[this.NumSeats];

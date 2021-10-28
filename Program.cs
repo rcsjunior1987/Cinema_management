@@ -36,18 +36,10 @@ namespace Cinema_management
                         cinema.DeleteCustomer();
                         continue;
                     case 3:
-                        // List all Customers
-                        cinema.ListAllCustomers();                        
-                        continue;   
-                    case 4:
                         // Insert a new Movie
                         cinema.SetNewMovie();
                         continue;
-                    case 5:
-                        // List all movies already inserted
-                        cinema.ListAllMovies();
-                        continue;
-                    case 6:
+                    case 4:
                         // Buy Ticket
                         cinema.BuyTicket();
                         continue;
@@ -72,10 +64,8 @@ namespace Cinema_management
 
                 Console.WriteLine("1. Add Customers");
                 Console.WriteLine("2. Delete Customers");
-                Console.WriteLine("3. List all Customers");
-                Console.WriteLine("4. Insert a new movie");
-                Console.WriteLine("5. List all movies");
-                Console.WriteLine("6. Buy ticket");
+                Console.WriteLine("3. Insert a new movie");
+                Console.WriteLine("4. Buy ticket");
                 Console.WriteLine("0. Quit");
                 Console.WriteLine();
 
@@ -84,7 +74,7 @@ namespace Cinema_management
 
                 bool validInput = Int32.TryParse(input, out int selection);
 
-                if (!validInput || selection < 0 || selection > 6)
+                if (!validInput || selection < 0 || selection > 4)
                 {
                     Console.WriteLine("Please enter a valid option");
                     continue;

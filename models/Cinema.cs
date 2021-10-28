@@ -20,66 +20,84 @@ public class Cinema
     public void BuyTicket() {
 
         bool exit = false;
-        Customer customer = new Customer();
 
-        Movie movie = this.moviesCollection.PeepTop();
+        while (exit == false) {
 
-        if (movie == null)
-            Console.WriteLine("There is no movie to be shown!");
-        else {
+            // Gets movie at the Head of the Stack
+            Movie movie = this.moviesCollection.PeepTop();
 
-            while (exit == false) {
-                Console.WriteLine("\n Please Enter an existed Customer Name or [CANCEL] to abort the operation!");
-                customer = this.GetCustomer();
+            if (movie == null) {
+                Console.WriteLine("\n There is no movie to be shown!");
+                break;
+            }
 
-                if (customer.Name != "CANCEL")
-                    customer = this.Customers.Find(customer);
-                else
-                    exit = true;
+            Customer customer = new Customer();
 
-                if(exit == false
-                && customer != null) {
+            Console.WriteLine("\n Please Enter an existed Customer Name or [CANCEL] to abort the operation!");
 
-                    Screenings screeningsHead = null;
+            string customerName = Console.ReadLine();
 
-                    while(movie.Screenings != null && exit == false) {
+            if (customerName.ToUpper() != "CANCEL") {
+                customer.Name = customerName;
+                customer = this.Customers.Find(customer);
+            } else
+                exit = true;
 
-                        screeningsHead = movie.Screenings.Peek();
+            if(exit == false
+            && customer != null) {
 
-                        int indexTicket = this.GetLastTicketAvailable(screeningsHead);
+                Screenings screeningsHead = null;
 
-                        if(indexTicket > -1) {
-                            Ticket newTicket = new Ticket(customer);
-                            screeningsHead.Seats[indexTicket] = new Seat(newTicket);
+                // Gets the screen at the Head of the queue
+                screeningsHead = movie.Screenings.Peek();
 
-                            // Adds one to Customer HowManyScreenings
-                            newTicket.Customer.HowManyScreenings++;
+                int indexTicket = this.GetLastTicketAvailable(screeningsHead);
 
-                            // Counts number of Free seats after reservation
-                            indexTicket = this.GetLastTicketAvailable(screeningsHead);
+                if(indexTicket > -1) {
+                    Ticket newTicket = new Ticket(customer);
 
-                            // If the Screening is full 
-                            if (indexTicket == -1) {
+                    // Check if the quantity of tickets bought by a customer is multiple of 10
+                    if (
+                        (newTicket.Customer.HowManyScreenings >0)
+                     & ((newTicket.Customer.HowManyScreenings % 10) == 0)
+                        )
+                        // Check so, marks the ticket payment method as courtesy
+                        newTicket.PaymentMethod = "courtesy";
+                    else
+                        // Otherwise the customer pays for it
+                        newTicket.PaymentMethod = customer.PaymentMethod;
 
-                                // It deleted the actual Screenings
-                                screeningsHead = movie.Screenings.DeQueue();
+                    // Sets the first seat available
+                    screeningsHead.Seats[indexTicket] = new Seat(newTicket);
 
-                                // Check if there is no more screenings for its movie
-                                if(movie.Screenings.Peek() == null) {
-                                    // If so, the head movie is Poped from the Stack
-                                    moviesCollection.Pop();
-                                }
+                    // Decrease quantity of seats available
+                    screeningsHead.NumSeatsAvailable--;
 
-                                exit = true;
-                            }
-                        }
+                    // Adds one to Customer HowManyScreenings
+                    newTicket.Customer.HowManyScreenings++;
+
+                    // Counts number of Available seats after reservation
+                    indexTicket = this.GetLastTicketAvailable(screeningsHead);
+
+                    // If the Screening is full 
+                    if (indexTicket == -1) {
+
+                        // It deleted the actual Screenings
+                        screeningsHead = movie.Screenings.DeQueue();
+
+                        // Check if there is no more screenings for its movie
+                        if(movie.Screenings.Peek() == null)
+                            // If so, the head movie is Poped from the Stack
+                            moviesCollection.Pop();
                     }
-                }
 
+                    Console.WriteLine("\n" + newTicket.ToString());
+                    Console.WriteLine(movie.ToString());
+                    Console.ReadLine();
+                }
             }
 
         }
-
     }
 
     private int GetLastTicketAvailable(Screenings screenings) {
@@ -101,6 +119,7 @@ public class Cinema
         Customer newCustomer = this.GetNewCustomer();
         this.Customers.Add(newCustomer);
         this.Customers.Sort();
+        this.ListAllCustomers();
     }
     public void DeleteCustomer()
     {                
@@ -115,8 +134,7 @@ public class Cinema
             if(customer is not null)
             {
                 Customers.Remove(customer);
-                Console.WriteLine("Customer Deleted");
-                Console.ReadLine();
+                this.ListAllCustomers();
             }
             else
                 Console.WriteLine("\n Customer does not exist!");
@@ -138,7 +156,7 @@ public class Cinema
             if (name.ToUpper() != "CANCEL")
             {
                 Console.WriteLine("\n Please Enter the NAME of the new customer or [CANCEL] to abort the operation!");
-                name = Console.ReadLine().ToUpper();
+                name = Console.ReadLine();
             } else
             {
                 customer = null;
@@ -148,7 +166,7 @@ public class Cinema
             if (phoneNumber.ToUpper() != "CANCEL")
             {
                 Console.WriteLine("\n Please Enter the PHONE NUMBER or [CANCEL] to abort the operation!");
-                phoneNumber = Console.ReadLine().ToUpper();
+                phoneNumber = Console.ReadLine();
                 exit = true;
             } else
             {
@@ -158,7 +176,7 @@ public class Cinema
             if (paymentMethod.ToUpper() != "CANCEL")
             {
                 Console.WriteLine("\n Please Enter the PAYMENT METHOD or [CANCEL] to abort the operation!");
-                paymentMethod = Console.ReadLine().ToUpper();
+                paymentMethod = Console.ReadLine();
                 exit = true;
             } else
             {

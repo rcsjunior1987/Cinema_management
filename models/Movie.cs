@@ -37,7 +37,7 @@ public class Movie
 
             foreach(Screenings s in this.Screenings) {
                 movie = movie + "\n         Screenings Id: " + s.Id;
-                movie = movie + ", Seats available: " + s.NumSeats;
+                movie = movie + ", Seats available: " + s.NumSeatsAvailable;
             }
 
             return movie;

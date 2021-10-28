@@ -8,7 +8,11 @@ public class Ticket
 
         /* Custumer who bouth the ticket */
         private Customer customer;
-        public Customer Customer { get => customer; set => customer = value; }           
+        public Customer Customer { get => customer; set => customer = value; }
+
+        /* Payment method used by customer */
+        private string paymentMethod;
+        public string PaymentMethod { get => paymentMethod; set => paymentMethod = value; }
         
         public Ticket() { }
 
@@ -20,7 +24,9 @@ public class Ticket
 
         public override string ToString()
         {
-            return " Customer: " + this.Customer.Name;
+            return "Customer name: " + customer.Name
+                 + ", Quantity of Ticket bought: " + customer.HowManyScreenings
+                 + ", Ticket Payment Method: " + this.PaymentMethod;
         }
 
         public override bool Equals(object other)
