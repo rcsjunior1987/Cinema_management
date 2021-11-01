@@ -6,7 +6,7 @@ using System.Collections.Generic;
       which allows items to be stored in a LinkedList.
 */ 
 public class Customer : Person
-    {
+    { 
 
         /* Phone number of the customer */
         private string phoneNumber;
@@ -31,6 +31,11 @@ public class Customer : Person
             this.PhoneNumber = phoneNumber;
             this.PaymentMethod = paymentMethod;
             this.HowManyScreenings = howManyScreenings;
+        }
+
+        public Customer(string name) : base(name)
+        {
+            this.Name = name;
         }
 
         /* Returns the string with the costumers attributes */

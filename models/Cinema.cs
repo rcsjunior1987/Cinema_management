@@ -8,17 +8,20 @@ public class Cinema
     public Stack<Movie> MoviesCollection { get => moviesCollection; set => moviesCollection = value; }
     private LinkedList<Customer> customers;
     public LinkedList<Customer> Customers { get => customers; set => customers = value; }
-
+ 
     public Cinema()
     {
         this.Customers = new LinkedList<Customer>();
         this.MoviesCollection = new Stack<Movie>();
+
         this.SetCustomers();
-        this.SetMovie();
+        this.SetMovies();
+        this.setTickets();
+
+        Console.ReadKey();
     }                    
 
     public void BuyTicket() {
-
         bool exit = false;
 
         while (exit == false) {
@@ -201,15 +204,122 @@ public class Cinema
         Console.Write(this.MoviesCollection.ToString());
         Console.ReadLine();
     }
+    public void SetCustomers()
+    {           
+        // Start the clock to get the inicial time
+        CustomStopwatch sw = new CustomStopwatch();
+        sw.Start();
 
-    public void SetMovie()
-    {   
-        Movie movie = new Movie();
-        movie.Description = "Movie1";
-        
-        this.MoviesCollection.Push(movie);
-        this.SetNewScreenings(movie);
+        int numberOfCustomers = 1;
+
+        for (int i = 1; i<= numberOfCustomers; i++) {
+            Customer newCustomer = new Customer("Customer" + i.ToString(), "phoneNumber" + i.ToString(), "card", 0);
+            this.Customers.Add(newCustomer);
+        }
+
+        // Stop the clock to get the time spent
+        sw.Stop();
+        Console.WriteLine("Stopwatch elapsed s: {0} ", sw.Elapsed.TotalSeconds);
     }
+    public void SetMovies()
+    {   
+        // Start the clock to get the inicial time
+        CustomStopwatch sw = new CustomStopwatch();
+        sw.Start();
+
+        int numberOfMovies = 100;
+
+        for (int i = 1; i<= numberOfMovies; i++) {
+            Movie movie = new Movie("Movie" + Convert.ToString(i));
+            this.MoviesCollection.Push(movie);
+            this.SetNewScreenings(movie);
+        }
+
+        // Stop the clock to get the time spent
+        sw.Stop();
+        Console.WriteLine("Stopwatch elapsed s: {0} ", sw.Elapsed.TotalSeconds);
+    }
+
+    public void setTickets() {
+
+        // Start the clock to get the inicial time
+        CustomStopwatch sw = new CustomStopwatch();
+        sw.Start();
+
+        int numberOfTicket = 150;
+
+        //------------------------
+
+        bool exit = false;
+
+        for(int i=0; i<= numberOfTicket; i++) {
+
+            // Gets movie at the Head of the Stack
+            Movie movie = this.moviesCollection.PeepTop();
+
+            Customer customer = new Customer("Customer1");
+            customer = this.Customers.Find(customer);
+            
+            if(exit == false
+            && customer != null
+            && movie != null) {
+
+                Screenings screeningsHead = null;
+
+                // Gets the screen at the Head of the queue
+                screeningsHead = movie.Screenings.Peek();
+
+                int indexTicket = this.GetLastTicketAvailable(screeningsHead);
+
+                if(indexTicket > -1) {
+                    Ticket newTicket = new Ticket(customer);
+
+                    // Check if the quantity of tickets bought by a customer is multiple of 10
+                    if (
+                        (newTicket.Customer.HowManyScreenings >0)
+                     & ((newTicket.Customer.HowManyScreenings % 10) == 0)
+                        )
+                        // Check so, marks the ticket payment method as courtesy
+                        newTicket.PaymentMethod = "courtesy";
+                    else
+                        // Otherwise the customer pays for it
+                        newTicket.PaymentMethod = customer.PaymentMethod;
+
+                    // Sets the first seat available
+                    screeningsHead.Seats[indexTicket] = new Seat(newTicket);
+
+                    // Decrease quantity of seats available
+                    screeningsHead.NumSeatsAvailable--;
+
+                    // Adds one to Customer HowManyScreenings
+                    newTicket.Customer.HowManyScreenings++;
+
+                    // Counts number of Available seats after reservation
+                    indexTicket = this.GetLastTicketAvailable(screeningsHead);
+
+                    // If the Screening is full 
+                    if (indexTicket == -1) {
+
+                        // It deleted the actual Screenings
+                        screeningsHead = movie.Screenings.DeQueue();
+
+                        // Check if there is no more screenings for its movie
+                        if(movie.Screenings.Peek() == null)
+                            // If so, the head movie is Poped from the Stack
+                            moviesCollection.Pop();
+                    }
+                   
+                }
+            }
+        }
+
+        //------------------------
+
+        // Stop the clock to get the time spent
+        sw.Stop();
+        Console.WriteLine("Stopwatch elapsed s: {0} ", sw.Elapsed.TotalSeconds);
+    }
+
 
     private void SetNewScreenings(Movie movie) {
         for (int i = 0; i<=2; i++) {
@@ -264,19 +374,9 @@ public class Cinema
 
         return customer;
     }
-    public void SetCustomers()
-    {   
-
-        for (int i = 1; i<= 5; i++) {
-            Customer newCustomer = new Customer("Customer" + i.ToString(), "phoneNumber" + i.ToString(), "card", 0);
-            this.Customers.Add(newCustomer);
-        }
-
-        this.Customers.Sort();
-    }
     public void ListAllCustomers()
     {
-        Console.WriteLine(this.Customers.ToString());
+        Console.WriteLine("\n" + this.Customers.ToString());
         Console.ReadLine();
             
     }
@@ -294,5 +394,6 @@ public class Cinema
     public override int GetHashCode()
     {
         return base.GetHashCode();
-    }  
+    }
+
 }

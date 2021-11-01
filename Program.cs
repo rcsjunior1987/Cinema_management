@@ -3,7 +3,7 @@
 namespace Cinema_management
 { 
     class Program
-    {
+    { 
             
         static void Main(string[] args)
         {
@@ -90,7 +90,6 @@ namespace Cinema_management
         private Cinema GetCinema()
         {   
             Cinema store = new Cinema();
-
             return store;
         }
 

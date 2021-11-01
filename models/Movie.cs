@@ -17,7 +17,7 @@ public class Movie
         /*Screenings of Movie */
         private Queue<Screenings> screenings;
         public Queue<Screenings> Screenings { get => screenings; set => screenings = value; }
-
+ 
         public Movie() { 
             this.Screenings = new Queue<Screenings>();
         }
@@ -26,6 +26,8 @@ public class Movie
         {
             this.Description = description;
             this.id = Guid.NewGuid();
+
+            this.Screenings = new Queue<Screenings>();
         }
 
         /* Returns the string with attributes of movie */

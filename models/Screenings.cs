@@ -30,7 +30,7 @@ public class Screenings : IComparable
         this.Id = Guid.NewGuid();
 
         // Definies the quantity of seat
-        this.NumSeats = 2;
+        this.NumSeats = 20;
 
         // Quantity of seats available
         //  starts with the same number of seats

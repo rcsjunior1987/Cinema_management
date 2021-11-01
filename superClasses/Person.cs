@@ -27,8 +27,7 @@ public class Person : IComparable
 
     /* Returns the string with the object attributes */
     public override string ToString() {
-        return " ID: " + this.Id
-             + ", Name: " + this.Name;
+        return "Name: " + this.Name;
     }
 
     public override bool Equals(object other)
