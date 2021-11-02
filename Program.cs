@@ -31,7 +31,7 @@ namespace Cinema_management
                         // Add Customers
                         cinema.SetNewCustomer();
                         continue;
-                    case 2:
+                    case 2: 
                         // Delete Customers
                         cinema.DeleteCustomer();
                         continue;

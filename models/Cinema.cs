@@ -15,8 +15,10 @@ public class Cinema
         this.MoviesCollection = new Stack<Movie>();
 
         this.SetCustomers();
-        this.SetMovies();
-        this.setTickets();
+        this.DeleteCustomers();
+
+        //this.SetMovies();
+        //this.setTickets();
 
         Console.ReadKey();
     }                    
@@ -207,10 +209,10 @@ public class Cinema
     public void SetCustomers()
     {           
         // Start the clock to get the inicial time
-        CustomStopwatch sw = new CustomStopwatch();
-        sw.Start();
+        //CustomStopwatch sw = new CustomStopwatch();
+        //sw.Start();
 
-        int numberOfCustomers = 1;
+        int numberOfCustomers = 1000;
 
         for (int i = 1; i<= numberOfCustomers; i++) {
             Customer newCustomer = new Customer("Customer" + i.ToString(), "phoneNumber" + i.ToString(), "card", 0);
@@ -221,6 +223,27 @@ public class Cinema
         sw.Stop();
         Console.WriteLine("Stopwatch elapsed s: {0} ", sw.Elapsed.TotalSeconds);
     }
+
+    public void DeleteCustomers()
+    {                
+        // Start the clock to get the inicial time
+        CustomStopwatch sw = new CustomStopwatch();
+        sw.Start();
+
+        int numberOfCustomers = 10000; 
+            
+        for (int i = 1; i<= numberOfCustomers; i++) {
+            Customer newCustomer = new Customer("Customer" + i.ToString());
+            Customers.Remove(newCustomer);
+            Console.WriteLine(newCustomer.Name + " deleted");
+        }
+ 
+        // Stop the clock to get the time spent
+        sw.Stop();
+        Console.WriteLine("Stopwatch elapsed s: {0} ", sw.Elapsed.TotalSeconds);
+    }
+
+
     public void SetMovies()
     {   
         // Start the clock to get the inicial time
